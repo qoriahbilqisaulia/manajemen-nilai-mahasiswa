@@ -1,49 +1,93 @@
-function calculateFinalScore(tugas, uts, uas) {
+const TUGAS_WEIGHT = 0.30;
+const UTS_WEIGHT = 0.30;
+const UAS_WEIGHT = 0.40;
 
-    return (tugas * 0.3) +
-           (uts * 0.3) +
-           (uas * 0.4);
-
+function calculateFinalScore(
+    tugas,
+    uts,
+    uas
+) {
+    return (
+        tugas * TUGAS_WEIGHT +
+        uts * UTS_WEIGHT +
+        uas * UAS_WEIGHT
+    );
 }
 
-function determineGrade(total) {
+function determineGrade(score) {
 
-    if (total >= 85) return "A";
-    if (total >= 70) return "B";
-    if (total >= 60) return "C";
-    if (total >= 50) return "D";
+    if (score >= 85) return "A";
+    if (score >= 70) return "B";
+    if (score >= 60) return "C";
+    if (score >= 50) return "D";
 
     return "E";
 }
 
-function proses() {
+function displayResult(
+    name,
+    score,
+    grade
+) {
 
-    let nama = document.getElementById("nama").value;
+    document.getElementById(
+        "hasil"
+    ).innerHTML = `
 
-    let tugas = parseInt(
-        document.getElementById("tugas").value
-    );
+        <h3>Hasil Nilai Mahasiswa</h3>
 
-    let uts = parseInt(
-        document.getElementById("uts").value
-    );
+        <p>Nama: ${name}</p>
 
-    let uas = parseInt(
-        document.getElementById("uas").value
-    );
+        <p>Total Nilai: ${score}</p>
 
-    let total =
+        <p>Grade: ${grade}</p>
+
+    `;
+}
+
+function processStudentData() {
+
+    const name =
+        document.getElementById(
+            "nama"
+        ).value;
+
+    const tugas =
+        Number(
+            document.getElementById(
+                "tugas"
+            ).value
+        );
+
+    const uts =
+        Number(
+            document.getElementById(
+                "uts"
+            ).value
+        );
+
+    const uas =
+        Number(
+            document.getElementById(
+                "uas"
+            ).value
+        );
+
+    const finalScore =
         calculateFinalScore(
             tugas,
             uts,
             uas
         );
 
-    let grade =
-        determineGrade(total);
+    const grade =
+        determineGrade(
+            finalScore
+        );
 
-    document.getElementById("hasil").innerHTML =
-        "Nama: " + nama +
-        "<br>Total: " + total +
-        "<br>Grade: " + grade;
+    displayResult(
+        name,
+        finalScore,
+        grade
+    );
 }
