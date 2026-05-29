@@ -1,6 +1,8 @@
-const TUGAS_WEIGHT = 0.30;
-const UTS_WEIGHT = 0.30;
-const UAS_WEIGHT = 0.40;
+return (
+    tugas * TUGAS_WEIGHT +
+    uts * UTS_WEIGHT +
+    uas * UAS_WEIGHT
+);
 
 function calculateFinalScore(
     tugas,
